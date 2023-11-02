@@ -1,0 +1,129 @@
+{
+  "mangalib": {
+    "authors": [
+      {
+        "author": {
+          "name": "GEE So-Lyung",
+          "manhws": [
+            {
+              "title": "Поднятие уровня в одиночку",
+              "publicationYear": "2018",
+              "chapters": "202",
+              "translationTeam": {
+                "publicationProjects": "183",
+                "adminName": "david",
+                "name": "Assley Team"
+              }
+            }
+          ]
+        }
+      },
+      {
+        "author": {
+          "name": "Aro",
+          "manhws": [
+            {
+              "title": "Несокрушимый игрок",
+              "publicationYear": "2021",
+              "chapters": "52",
+              "translationTeam": {
+                "publicationProjects": "21",
+                "adminName": "dimaSick",
+                "name": "PULSAR TEAM"
+              }
+            }
+          ]
+        }
+      },
+      {
+        "author": {
+          "name": "Carnby",
+          "manhws": [
+            {
+              "title": "Милый дом",
+              "publicationYear": "2017",
+              "chapters": "141",
+              "translationTeam": {
+                "publicationProjects": "352",
+                "adminName": "TRi_kA",
+                "name": "Rikudou-Sennin Clan"
+              }
+            },
+            {
+              "title": "О дивный новый мир",
+              "publicationYear": "2017",
+              "chapters": "5",
+              "translationTeam": {
+                "publicationProjects": "7",
+                "adminName": "Бай Усян",
+                "name": "SCORUN TEAM"
+              }
+            }
+          ]
+        }
+      },
+      {
+        "author": {
+          "name": "Yuin",
+          "manhws": [
+            {
+              "title": "Реинкарнация врача",
+              "publicationYear": "2019",
+              "chapters": "149",
+              "translationTeam": {
+                "publicationProjects": "29",
+                "adminName": "MysteryS",
+                "name": "The Lemon Team"
+              }
+            },
+            {
+              "title": "Доктор-игрок",
+              "publicationYear": "2022",
+              "chapters": "49",
+              "translationTeam": {
+                "publicationProjects": "52",
+                "adminName": "Chiaki_Key",
+                "name": "The Keeper"
+              }
+            },
+            {
+              "title": "Тёмная натура леди",
+              "publicationYear": "2022",
+              "chapters": "42",
+              "translationTeam": {
+                "publicationProjects": "53",
+                "adminName": "Keris.",
+                "name": "Keris"
+              }
+            }
+          ]
+        }
+      },
+      {"author": {
+          "name": "Hooressha",
+          "manhws": [
+            {
+              "title": "Живой мертвец",
+              "publicationYear": "2018",
+              "chapters": "104",
+              "translationTeam": {
+                "publicationProjects": "34",
+                "adminName": "Lumina",
+                "name": "SuperBlinchik Team"
+              }
+            },
+            {
+              "title": "Одержимый",
+              "publicationYear": "2014",
+              "chapters": "16",
+              "translationTeam": {
+                "publicationProjects": "380",
+                "adminName": "Ardith",
+                "name": "Булочки"
+              }
+            }
+          ]
+        }
+      }]
+  }
+}
