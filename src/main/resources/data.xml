@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <mangalib>
     <manhwa id="0">
-        <author>GEE So-Lyung</author>
         <title>Поднятие уровня в одиночку</title>
+        <author>GEE So-Lyung</author>
         <publicationYear>2018</publicationYear>
         <chapters>202</chapters>
         <translationTeam name="Assley Team">
@@ -10,10 +10,9 @@
             <adminName>david</adminName>
         </translationTeam>
     </manhwa>
-
     <manhwa id="1">
-        <author>Aro</author>
         <title>Несокрушимый игрок</title>
+        <author>Aro</author>
         <publicationYear>2021</publicationYear>
         <chapters>52</chapters>
         <translationTeam name="PULSAR TEAM">
@@ -21,10 +20,9 @@
             <adminName>dimaSick</adminName>
         </translationTeam>
     </manhwa>
-
     <manhwa id="2">
-        <author>Carnby</author>
         <title>Милый дом</title>
+        <author>Carnby</author>
         <publicationYear>2017</publicationYear>
         <chapters>141</chapters>
         <translationTeam name="Rikudou-Sennin Clan">
@@ -32,10 +30,9 @@
             <adminName>TRi_kA</adminName>
         </translationTeam>
     </manhwa>
-
     <manhwa id="3">
-        <author>Carnby</author>
         <title>О дивный новый мир</title>
+        <author>Carnby</author>
         <publicationYear>2017</publicationYear>
         <chapters>5</chapters>
         <translationTeam name="SCORUN TEAM">
@@ -43,10 +40,9 @@
             <adminName>Бай Усян</adminName>
         </translationTeam>
     </manhwa>
-
     <manhwa id="4">
-        <author>Yuin</author>
         <title>Реинкарнация врача</title>
+        <author>Yuin</author>
         <publicationYear>2019</publicationYear>
         <chapters>149</chapters>
         <translationTeam name="The Lemon Team">
@@ -54,10 +50,9 @@
             <adminName>MysteryS</adminName>
         </translationTeam>
     </manhwa>
-
     <manhwa id="5">
-        <author>Yuin</author>
         <title>Доктор-игрок</title>
+        <author>Yuin</author>
         <publicationYear>2022</publicationYear>
         <chapters>49</chapters>
         <translationTeam name="The Keeper">
@@ -65,10 +60,9 @@
             <adminName>Chiaki_Key</adminName>
         </translationTeam>
     </manhwa>
-
     <manhwa id="6">
-        <author>Yuin</author>
         <title>Тёмная натура леди</title>
+        <author>Yuin</author>
         <publicationYear>2022</publicationYear>
         <chapters>42</chapters>
         <translationTeam name="Keris">
@@ -76,10 +70,9 @@
             <adminName>Keris.</adminName>
         </translationTeam>
     </manhwa>
-
     <manhwa id="7">
-        <author>Hooressha</author>
         <title>Живой мертвец</title>
+        <author>Hooressha</author>
         <publicationYear>2018</publicationYear>
         <chapters>104</chapters>
         <translationTeam name="SuperBlinchik Team">
@@ -87,10 +80,9 @@
             <adminName>Lumina</adminName>
         </translationTeam>
     </manhwa>
-
     <manhwa id="8">
-        <author>Hooressha</author>
         <title>Одержимый</title>
+        <author>Hooressha</author>
         <publicationYear>2014</publicationYear>
         <chapters>16</chapters>
         <translationTeam name="Булочки">
@@ -98,5 +90,4 @@
             <adminName>Ardith</adminName>
         </translationTeam>
     </manhwa>
-
 </mangalib>

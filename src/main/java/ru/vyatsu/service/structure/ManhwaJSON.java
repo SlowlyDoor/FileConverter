@@ -3,6 +3,8 @@ import lombok.*;
 
 @Getter
 @Setter
+@AllArgsConstructor
+@NoArgsConstructor
 public class ManhwaJSON
 {
     private ManhwsJSON manhws; // Название манхвы
