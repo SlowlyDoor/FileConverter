@@ -1,15 +1,9 @@
 package ru.vyatsu.service.structure;
 
-import lombok.Data;
-import ru.vyatsu.service.structure.TeamTranslation;
+import javax.xml.bind.annotation.*;
 
-import javax.xml.bind.annotation.XmlAttribute;
-import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlElementWrapper;
-import javax.xml.bind.annotation.XmlRootElement;
-
-@Data
-public class ManhwaXML {
+@XmlType(propOrder = {"id", "title", "author", "publicationYear", "chapters", "translationTeam"})
+public class Manhwa {
     private String id;
     private String title;
     private String author;
