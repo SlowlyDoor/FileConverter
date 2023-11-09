@@ -15,7 +15,7 @@ import java.io.OutputStream;
 import java.util.HashMap;
 import java.util.Map;
 
-public class DesirealizeXMLtoClass
+public class ConvertXmlToJson
 {
     public void Converter(String xmlPath, String jsonPath)
     {
@@ -59,7 +59,7 @@ public class DesirealizeXMLtoClass
             // Получаем имя автора
             String authorName = manhwa.getAuthor();
 
-            // Добавляем мангу в соответствующую группу в карте
+            // Добавляем мангу в соответствующую группу в словаре
             authorMap.computeIfAbsent(authorName, k -> Json.createArrayBuilder())
                     .add(manhwaBuilder);
         }
@@ -81,9 +81,8 @@ public class DesirealizeXMLtoClass
                 .add("mangalib", Json.createObjectBuilder().add("authors", authorsBuilder))
                 .build();
 
-        // Устанавливаем параметры JsonWriterFactory для красивого вывода
+        // Устанавливаем параметры JsonWriterFactory для читабельного вывода
         Map<String, Object> properties = new HashMap<>(1);
-        // Позволает писать json файл в читабельном виде
         properties.put(JsonGenerator.PRETTY_PRINTING, true);
         JsonWriterFactory writerFactory = Json.createWriterFactory(properties);
 
