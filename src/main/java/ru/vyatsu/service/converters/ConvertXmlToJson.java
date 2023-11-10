@@ -13,6 +13,7 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.OutputStream;
 import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.Map;
 
 public class ConvertXmlToJson
@@ -39,8 +40,8 @@ public class ConvertXmlToJson
     }
 
     private void WriteToJson(String jsonPath, Mangalib mangalib) {
-        // Создаем карту для хранения манг по авторам
-        Map<String, JsonArrayBuilder> authorMap = new HashMap<>();
+        // Создаем словарь для хранения манг по авторам
+        Map<String, JsonArrayBuilder> authorMap = new LinkedHashMap<>(); // Используем LinkedHashMap для сохранения порядка
 
         for (Manhwa manhwa : mangalib.getMangalib()) {
             // Создаем объекты для манги и ее переводчиков
