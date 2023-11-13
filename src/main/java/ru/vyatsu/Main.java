@@ -11,7 +11,9 @@ import java.io.IOException;
 public class Main {
     public static void main(String[] args) {
         if (args.length == 2) {
-            String path = "C:\\Users\\hellp\\IdeaProjects\\untitled1\\src\\main\\resources\\";
+            String userDir = System.getProperty("user.dir");
+            String path = userDir + File.separator + "src" + File.separator + "main" + File.separator + "resources" + File.separator;
+            //String path = "C:\\Users\\hellp\\IdeaProjects\\untitled1\\src\\main\\resources\\";
 
             try {
                 // Обрабатываем имя первого файла

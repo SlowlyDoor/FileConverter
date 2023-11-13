@@ -18,7 +18,8 @@ class MainTests {
         Main main = new Main();
 
         // Создаем временные файлы для теста
-        String path = "C:\\Users\\hellp\\IdeaProjects\\untitled1\\src\\main\\resources\\";
+        String userDir = System.getProperty("user.dir");
+        String path = userDir + File.separator + "src" + File.separator + "main" + File.separator + "resources" + File.separator;
         String inputXmlPath = "data.xml";
         String outputJsonPath = "dataTest.json";
 
@@ -44,7 +45,8 @@ class MainTests {
         Main main = new Main();
 
         // Создаем временные файлы для теста
-        String path = "C:\\Users\\hellp\\IdeaProjects\\untitled1\\src\\main\\resources\\";
+        String userDir = System.getProperty("user.dir");
+        String path = userDir + File.separator + "src" + File.separator + "main" + File.separator + "resources" + File.separator;
         String inputJsonPath = "data.json";
         String outputXmlPath = "dataTest.xml";
 
@@ -70,7 +72,8 @@ class MainTests {
         Main main = new Main();
 
         // Создаем временные файлы для теста
-        String path = "C:\\Users\\hellp\\IdeaProjects\\untitled1\\src\\main\\resources\\";
+        String userDir = System.getProperty("user.dir");
+        String path = userDir + File.separator + "src" + File.separator + "main" + File.separator + "resources" + File.separator;
         String inputJsonPath = "dataJS";
         String inputXmlPath = "dataXML";
         String output = "output";
@@ -96,7 +99,8 @@ class MainTests {
         Main main = new Main();
 
         // Создаем временные файлы для теста
-        String path = "C:\\Users\\hellp\\IdeaProjects\\untitled1\\src\\main\\resources\\";
+        String userDir = System.getProperty("user.dir");
+        String path = userDir + File.separator + "src" + File.separator + "main" + File.separator + "resources" + File.separator;
         String inputXmlPath = "data.xml";
         String inputJsonPath = "data.json";
         String output = "output";
@@ -122,7 +126,8 @@ class MainTests {
         Main main = new Main();
 
         // Создаем временные файлы для теста
-        String path = "C:\\Users\\hellp\\IdeaProjects\\untitled1\\src\\main\\resources\\";
+        String userDir = System.getProperty("user.dir");
+        String path = userDir + File.separator + "src" + File.separator + "main" + File.separator + "resources" + File.separator;
         String inputXmlPath = "dataXML";
         String inputJsonPath = "dataJS";
         String outputXmlPath = "output.xml";
