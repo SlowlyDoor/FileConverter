@@ -2,70 +2,93 @@ package ru.vyatsu;
 
 import ru.vyatsu.service.converters.ConvertJsonToXml;
 import ru.vyatsu.service.converters.ConvertXmlToJson;
-import ru.vyatsu.service.structure.Mangalib;
-
-import javax.xml.bind.JAXBException;
-import java.io.FileNotFoundException;
 
 import java.io.BufferedReader;
+import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
-public class Main
-{
-    public static void main(String[] args) throws JAXBException, FileNotFoundException, IOException {
+
+public class Main {
+    public static void main(String[] args) {
         if (args.length == 2) {
-            String path = "..\\..\\..\\src\\main\\resources\\" ;
+            String path = "C:\\Users\\hellp\\IdeaProjects\\untitled1\\src\\main\\resources\\";
 
-            // Проверка, если входной файл задан без расширения
-            if (!args[0].contains(".")) {
-                String fileContent = readFileContent(args[0]);
+            try {
+                // Обрабатываем имя первого файла
+                String inputFile = args[0];
+                String outputFile = args[1];
 
-                // Определение типа файла на основе его содержимого
-                String inputExtension = determineFileType(fileContent);
-                if (inputExtension == null) {
-                    System.out.println("Ошибка! Не удалось определить тип файла.");
-                    return;
+                // Проверяем, есть ли расширение у имени первого файла
+                if (!inputFile.contains(".")) {
+                    // Читаем содержимое файла, чтобы определить его тип
+                    String fileContent = readFileContent(path + inputFile);
+
+                    // Определяем тип файла на основе его содержимого
+                    String inputExtension = determineFileType(fileContent);
+                    if (inputExtension == null) {
+                        System.out.println("Ошибка! Не удалось определить тип файла.");
+                        return;
+                    }
+
+                    inputFile = inputFile + inputExtension;
                 }
 
-                args[0] = args[0] + inputExtension;
-            }
+                // Проверяем, есть ли расширение у имени второго файла
+                if (!outputFile.contains(".")) {
+                    // Определяем тип входного файла на основе его расширения
+                    String inputExtension = inputFile.substring(inputFile.lastIndexOf("."));
 
-            // Проверка, если выходной файл задан без расширения
-            if (!args[1].contains(".")) {
-                // Определение типа файла на основе расширения входного файла
-                String inputExtension = args[0].substring(args[0].lastIndexOf("."));
-                if (inputExtension.equals(".xml")) {
-                    args[1] = args[1] + ".json";
-                } else if (inputExtension.equals(".json")) {
-                    args[1] = args[1] + ".xml";
+                    // Определяем противоположный тип для выходного файла
+                    String outputExtension = determineOppositeFileType(inputExtension);
+                    if (outputExtension == null) {
+                        System.out.println("Конвертер предусматривает преобразование из xml в json, либо из json в xml. Иные расширения недоступны");
+                        return;
+                    }
+
+                    outputFile = outputFile + outputExtension;
+                }
+
+                // Получаем расширения входного и выходного файлов
+                String inputExtension = inputFile.substring(inputFile.lastIndexOf("."));
+                String outputExtension = outputFile.substring(outputFile.lastIndexOf("."));
+
+                if (inputExtension.equals(".xml") && outputExtension.equals(".json")) {
+                    ConvertXmlToJson conv = new ConvertXmlToJson();
+                    conv.Converter(path + inputFile, path + outputFile);
+                    System.out.println("Преобразование выполнено успешно!");
+                } else if (inputExtension.equals(".json") && outputExtension.equals(".xml")) {
+                    ConvertJsonToXml conv = new ConvertJsonToXml();
+                    conv.Convert(path + inputFile, path + outputFile);
+                    System.out.println("Преобразование выполнено успешно!");
                 } else {
                     System.out.println("Конвертер предусматривает преобразование из xml в json, либо из json в xml. Иные расширения недоступны");
-                    return;
                 }
-            }
-
-            // Получение расширений входного и выходного файлов
-            String inputExtension = args[0].substring(args[0].lastIndexOf("."));
-            String outputExtension = args[1].substring(args[1].lastIndexOf("."));
-
-            if (inputExtension.equals(".xml") && outputExtension.equals(".json")) {
-                ConvertXmlToJson conv = new ConvertXmlToJson();
-                conv.Converter(path + args[0],path + args[1]);
-                System.out.println("Преобразование выполнено успешно!");
-            } else if (inputExtension.equals(".json") && outputExtension.equals(".xml")) {
-                ConvertJsonToXml conv = new ConvertJsonToXml();
-                conv.Convert(path + args[0],path + args[1]);
-                System.out.println("Преобразование выполнено успешно!");
-            } else {
-                System.out.println("Конвертер предусматривает преобразование из xml в json, либо из json в xml. Иные расширения недоступны");
+            } catch (IOException e) {
+                e.printStackTrace();
             }
         } else {
             System.out.println("Ошибка! Команда должна содержать 2 аргумента: <исходный файл> <конвертированный файл>");
         }
     }
 
-
     private static String readFileContent(String fileName) throws IOException {
+        File file = new File(fileName);
+
+        // Проверяем, существует ли файл без расширения, и если да, пытаемся найти подходящее расширение
+        if (!file.exists() && !fileName.contains(".")) {
+            File dir = file.getAbsoluteFile().getParentFile();
+            String nameWithoutExtension = file.getName();
+            String[] extensionsToTry = {".xml", ".json"};
+
+            for (String extension : extensionsToTry) {
+                File potentialFile = new File(dir, nameWithoutExtension + extension);
+                if (potentialFile.exists()) {
+                    fileName = potentialFile.getAbsolutePath();
+                    break;
+                }
+            }
+        }
+
         try (BufferedReader br = new BufferedReader(new FileReader(fileName))) {
             StringBuilder content = new StringBuilder();
             String line;
@@ -76,6 +99,7 @@ public class Main
         }
     }
 
+
     private static String determineFileType(String fileContent) {
         if (fileContent.startsWith("{")) {
             return ".json";
@@ -85,4 +109,12 @@ public class Main
         return null;
     }
 
+    private static String determineOppositeFileType(String inputExtension) {
+        if (inputExtension.equals(".xml")) {
+            return ".json";
+        } else if (inputExtension.equals(".json")) {
+            return ".xml";
+        }
+        return null;
+    }
 }
