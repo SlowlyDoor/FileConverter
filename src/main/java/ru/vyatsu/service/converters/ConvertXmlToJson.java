@@ -12,10 +12,14 @@ import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.OutputStream;
+import java.nio.file.Files;
+import java.nio.file.Paths;
+import java.nio.file.StandardCopyOption;
 import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
+import java.io.*;
 public class ConvertXmlToJson
 {
     public void Converter(String xmlPath, String jsonPath)
@@ -40,8 +44,8 @@ public class ConvertXmlToJson
     }
 
     private void WriteToJson(String jsonPath, Mangalib mangalib) {
-        // Создаем словарь для хранения манг по авторам
-        Map<String, JsonArrayBuilder> authorMap = new LinkedHashMap<>(); // Используем LinkedHashMap для сохранения порядка
+        // Создаем карту для хранения манг по авторам
+        Map<String, JsonArrayBuilder> authorMap = new LinkedHashMap<>();
 
         for (Manhwa manhwa : mangalib.getMangalib()) {
             // Создаем объекты для манги и ее переводчиков
@@ -91,11 +95,28 @@ public class ConvertXmlToJson
         try (OutputStream os = new FileOutputStream(jsonPath)) {
             JsonWriter jsonWriter = writerFactory.createWriter(os);
             jsonWriter.writeObject(jsonObject);
-            jsonWriter.close();
+            // Удаляем начальную строку в файле
+            removeFirstLine(jsonPath);
         } catch (IOException e) {
             e.printStackTrace();
         }
     }
 
-
+    // Метод для удаления первой строки в файле
+    private static void removeFirstLine(String filePath) throws IOException {
+        RandomAccessFile file = new RandomAccessFile(filePath, "rw");
+        // Получаем длину файла
+        long length = file.length();
+        // Устанавливаем указатель на начало файла
+        file.getChannel().position(0);
+        // Создаем буфер для чтения
+        byte[] buffer = new byte[(int) length];
+        file.readFully(buffer);
+        // Записываем остальные данные в файл, исключая первую строку
+        file.getChannel().position(0);
+        file.write(buffer, "\n".length(), buffer.length - "\n".length());
+        // Усекаем файл до новой длины
+        file.getChannel().truncate(length - "\n".length());
+        file.close();
+    }
 }

@@ -5,8 +5,10 @@ import lombok.Data;
 import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlType;
 
 @Data
+@XmlType(propOrder = {"name", "publicationProjects", "adminName"})
 public class TeamTranslation {
     private String name;
     private Integer publicationProjects;

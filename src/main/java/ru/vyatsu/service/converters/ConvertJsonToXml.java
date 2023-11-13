@@ -18,14 +18,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class ConvertJsonToXml {
-    public void Convert(String json, String xml) {
-        try {
-            Mangalib mangalib = ReadJson(json);
-            WriteXml(xml, mangalib);
-        } catch (Exception e) {
-            // Handle or log the exception as needed
-            e.printStackTrace();
-        }
+    public void Convert(String json, String xml)  {
+        Mangalib mangalib = ReadJson(json);
+        WriteXml(xml, mangalib);
     }
 
     private void WriteXml(String path, Mangalib mangalib) {
@@ -36,7 +31,6 @@ public class ConvertJsonToXml {
 
             marshaller.marshal(mangalib, new File(path));
         } catch (JAXBException e) {
-            // Handle or log the exception as needed
             e.printStackTrace();
         }
     }
@@ -98,8 +92,8 @@ public class ConvertJsonToXml {
 
             mangalib.setMangalib(manhwaList);
             return mangalib;
-        } catch (FileNotFoundException | JsonException e) {
-            // Handle or log the exception as needed
+        } catch (FileNotFoundException e) {
+            // Обработка или логирование исключения по необходимости
             e.printStackTrace();
             return null;
         }
