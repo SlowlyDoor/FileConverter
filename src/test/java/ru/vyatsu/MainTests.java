@@ -15,7 +15,6 @@ class MainTests {
 
     @Test
     void testConvertXmlToJson() {
-        Main main = new Main();
 
         // Создаем временные файлы для теста
         String userDir = System.getProperty("user.dir");
@@ -25,7 +24,7 @@ class MainTests {
 
         try {
             // Запускаем конвертацию
-            main.main(new String[]{inputXmlPath, outputJsonPath});
+            Main.main(new String[]{inputXmlPath, outputJsonPath});
 
             // Проверяем, что JSON файл был создан
             assertTrue(new File(path + outputJsonPath).exists());
@@ -42,7 +41,6 @@ class MainTests {
 
     @Test
     void testConvertJsonToXml() {
-        Main main = new Main();
 
         // Создаем временные файлы для теста
         String userDir = System.getProperty("user.dir");
@@ -52,7 +50,7 @@ class MainTests {
 
         try {
             // Запускаем конвертацию
-            main.main(new String[]{inputJsonPath, outputXmlPath});
+            Main.main(new String[]{inputJsonPath, outputXmlPath});
 
             // Проверяем, что XML файл был создан
             assertTrue(new File(path + outputXmlPath).exists());
@@ -69,7 +67,6 @@ class MainTests {
 
     @Test
     void testConvertWithoutExtensions() {
-        Main main = new Main();
 
         // Создаем временные файлы для теста
         String userDir = System.getProperty("user.dir");
@@ -80,10 +77,10 @@ class MainTests {
 
         try {
             // Запускаем конвертацию с файлами, не содержащими расширения
-            main.main(new String[]{inputJsonPath, output});
+            Main.main(new String[]{inputJsonPath, output});
             assertTrue(new File(path + "output.xml").exists());
 
-            main.main(new String[]{inputXmlPath, output});
+            Main.main(new String[]{inputXmlPath, output});
             assertTrue(new File(path + "output.xml").exists());
         } catch (Exception e) {
             fail("Exception thrown: " + e.getMessage());
@@ -96,7 +93,6 @@ class MainTests {
 
     @Test
     void testConvertFirstMixedExtensions() {
-        Main main = new Main();
 
         // Создаем временные файлы для теста
         String userDir = System.getProperty("user.dir");
@@ -107,10 +103,10 @@ class MainTests {
 
         try {
             // Запускаем конвертацию с файлами, содержащими и не содержащими расширения
-            main.main(new String[]{inputXmlPath, output});
+            Main.main(new String[]{inputXmlPath, output});
             assertTrue(new File(path + "output.json").exists());
 
-            main.main(new String[]{inputJsonPath, output});
+            Main.main(new String[]{inputJsonPath, output});
             assertTrue(new File(path + "output.xml").exists());
         } catch (Exception e) {
             fail("Exception thrown: " + e.getMessage());
@@ -123,7 +119,6 @@ class MainTests {
 
     @Test
     void testConvertSecondMixedExtensions() {
-        Main main = new Main();
 
         // Создаем временные файлы для теста
         String userDir = System.getProperty("user.dir");
@@ -135,10 +130,10 @@ class MainTests {
 
         try {
             // Запускаем конвертацию с файлами, содержащими и не содержащими расширения
-            main.main(new String[]{inputXmlPath, outputJsonPath});
+            Main.main(new String[]{inputXmlPath, outputJsonPath});
             assertTrue(new File(path + "output.json").exists());
 
-            main.main(new String[]{inputJsonPath, outputXmlPath});
+            Main.main(new String[]{inputJsonPath, outputXmlPath});
             assertTrue(new File(path + "output.xml").exists());
         } catch (Exception e) {
             fail("Exception thrown: " + e.getMessage());
