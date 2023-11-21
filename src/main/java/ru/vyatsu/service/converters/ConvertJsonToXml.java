@@ -96,6 +96,10 @@ public class ConvertJsonToXml {
             // Обработка или логирование исключения по необходимости
             e.printStackTrace();
             return null;
+        } catch (javax.json.stream.JsonParsingException e) {
+            // Обработка или логирование исключения по необходимости
+            e.printStackTrace();
+            return null;
         }
     }
 }
