@@ -1,0 +1,9 @@
+Manifest-Version: 1.0
+Main-Class: ru.vyatsu.Main
+Class-Path: javax.persistence-2.2.0.jar stax-api-1.0-2.jar jackson-dataf
+ ormat-yaml-2.15.2.jar slf4j-api-2.0.9.jar snakeyaml-2.0.jar stax2-api-4
+ .2.1.jar gson-2.8.9.jar javax.json-api-1.1.4.jar javax.json-1.1.4.jar j
+ ackson-databind-2.16.0.jar jackson-core-2.16.0.jar jackson-annotations-
+ 2.16.0.jar woodstox-core-6.5.1.jar jaxb-api-2.1.jar activation-1.1.jar 
+ jackson-dataformat-xml-2.15.2.jar
+
