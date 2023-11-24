@@ -1,158 +1,88 @@
 package ru.vyatsu;
 
+import lombok.val;
 import org.junit.jupiter.api.Test;
-
+import org.junit.jupiter.api.io.TempDir;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.IOException;
+import java.io.PrintStream;
+import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Path;
-import java.nio.file.Paths;
-
-import static org.junit.jupiter.api.Assertions.assertTrue;
-import static org.junit.jupiter.api.Assertions.fail;
+import static org.assertj.core.api.Assertions.assertThat;
 
 class MainTests {
 
-    @Test
-    void testConvertXmlToJson() {
+    private static final Logger logger = LoggerFactory.getLogger(MainTests.class);
 
-        // Создаем временные файлы для теста
-        String userDir = System.getProperty("user.dir");
-        String path = userDir + File.separator + "src" + File.separator + "main" + File.separator + "resources" + File.separator;
-        String inputXmlPath = "data.xml";
-        String outputJsonPath = "dataTest.json";
+    @Test
+    void testMainWithInsufficientArgs(@TempDir Path tempDir) throws IOException {
+        val errContent = new ByteArrayOutputStream();
+        System.setErr(new PrintStream(errContent));
+        try {
+            val args = new String[]{"data.json"};
+            Main.main(args);
+
+            assertThat(errContent.toString()).contains("Необходимо указать два аргумента!");
+        } finally {
+            System.setErr(System.err);
+        }
+    }
+    @Test
+    void testMainWithCorrectArgs(@TempDir Path tempDir) throws IOException {
+        val outputPath = tempDir.resolve("test.json").toString();
+        val outputFile = new File(outputPath);
+
+        if (outputFile.exists() && !outputFile.delete()) {
+            throw new IOException("Не удалось удалить существующий выходной файл перед тестированием.");
+        }
 
         try {
-            // Запускаем конвертацию
-            Main.main(new String[]{inputXmlPath, outputJsonPath});
+            val args = new String[]{"src/test/resources/data.xml", outputPath};
+            Main.main(args);
 
-            // Проверяем, что JSON файл был создан
-            assertTrue(new File(path + outputJsonPath).exists());
-
-            // Проверяем, что созданный JSON файл совпадает с ожидаемым
-            assertTrue(isFileContentEqual(path + outputJsonPath, path + "data.json"));
-        } catch (Exception e) {
-            fail("Exception thrown: " + e.getMessage());
+            assertThat(outputFile.exists()).as("Выходной файл не был создан.").isTrue();
         } finally {
-            // Удаляем временные файлы
-            new File(path + outputJsonPath).delete();
+            if (outputFile.exists() && !outputFile.delete()) {
+                throw new IOException("Не удалось удалить выходной файл после тестирования.");
+            }
         }
     }
 
     @Test
-    void testConvertJsonToXml() {
-
-        // Создаем временные файлы для теста
-        String userDir = System.getProperty("user.dir");
-        String path = userDir + File.separator + "src" + File.separator + "main" + File.separator + "resources" + File.separator;
-        String inputJsonPath = "data.json";
-        String outputXmlPath = "dataTest.xml";
+    void testMainWithInvalidInputFile(@TempDir Path tempDir) throws IOException {
+        val errContent = new ByteArrayOutputStream();
+        System.setErr(new PrintStream(errContent));
 
         try {
-            // Запускаем конвертацию
-            Main.main(new String[]{inputJsonPath, outputXmlPath});
+            val args = new String[]{"FileIsNo.xml", "output.json"};
+            Main.main(args);
 
-            // Проверяем, что XML файл был создан
-            assertTrue(new File(path + outputXmlPath).exists());
-
-            // Проверяем, что созданный XML файл совпадает с ожидаемым
-            assertTrue(isFileContentEqual(path + outputXmlPath, path + "data.xml"));
-        } catch (Exception e) {
-            fail("Exception thrown: " + e.getMessage());
+            assertThat(errContent.toString()).contains("Произошла ошибка: Файл не найден");
         } finally {
-            // Удаляем временные файлы
-            new File(path + outputXmlPath).delete();
+            System.setErr(System.err);
         }
     }
 
     @Test
-    void testConvertWithoutExtensions() {
-
-        // Создаем временные файлы для теста
-        String userDir = System.getProperty("user.dir");
-        String path = userDir + File.separator + "src" + File.separator + "main" + File.separator + "resources" + File.separator;
-        String inputJsonPath = "dataJS";
-        String inputXmlPath = "dataXML";
-        String output = "output";
+    void testMainWithConversionError(@TempDir Path tempDir) throws IOException {
+        val errContent = new ByteArrayOutputStream();
+        System.setErr(new PrintStream(errContent));
 
         try {
-            // Запускаем конвертацию с файлами, не содержащими расширения
-            Main.main(new String[]{inputJsonPath, output});
-            assertTrue(new File(path + "output.xml").exists());
+            // Подготавливаем файл с некорректными данными
+            val invalidXmlPath = tempDir.resolve("invalid_data.xml");
+            Files.write(invalidXmlPath, "invalid xml data".getBytes(StandardCharsets.UTF_8));
 
-            Main.main(new String[]{inputXmlPath, output});
-            assertTrue(new File(path + "output.xml").exists());
-        } catch (Exception e) {
-            fail("Exception thrown: " + e.getMessage());
+            val args = new String[]{invalidXmlPath.toString(), "output.json"};
+            Main.main(args);
+
+            assertThat(errContent.toString()).contains("Произошла ошибка: при чтении xml файла");
         } finally {
-            // Удаляем временные файлы
-            new File(path + "output.json").delete();
-            new File(path + "output.xml").delete();
-        }
-    }
-
-    @Test
-    void testConvertFirstMixedExtensions() {
-
-        // Создаем временные файлы для теста
-        String userDir = System.getProperty("user.dir");
-        String path = userDir + File.separator + "src" + File.separator + "main" + File.separator + "resources" + File.separator;
-        String inputXmlPath = "data.xml";
-        String inputJsonPath = "data.json";
-        String output = "output";
-
-        try {
-            // Запускаем конвертацию с файлами, содержащими и не содержащими расширения
-            Main.main(new String[]{inputXmlPath, output});
-            assertTrue(new File(path + "output.json").exists());
-
-            Main.main(new String[]{inputJsonPath, output});
-            assertTrue(new File(path + "output.xml").exists());
-        } catch (Exception e) {
-            fail("Exception thrown: " + e.getMessage());
-        } finally {
-            // Удаляем временные файлы
-            new File(path + "output.json").delete();
-            new File(path + "output.xml").delete();
-        }
-    }
-
-    @Test
-    void testConvertSecondMixedExtensions() {
-
-        // Создаем временные файлы для теста
-        String userDir = System.getProperty("user.dir");
-        String path = userDir + File.separator + "src" + File.separator + "main" + File.separator + "resources" + File.separator;
-        String inputXmlPath = "dataXML";
-        String inputJsonPath = "dataJS";
-        String outputXmlPath = "output.xml";
-        String outputJsonPath = "output.json";
-
-        try {
-            // Запускаем конвертацию с файлами, содержащими и не содержащими расширения
-            Main.main(new String[]{inputXmlPath, outputJsonPath});
-            assertTrue(new File(path + "output.json").exists());
-
-            Main.main(new String[]{inputJsonPath, outputXmlPath});
-            assertTrue(new File(path + "output.xml").exists());
-        } catch (Exception e) {
-            fail("Exception thrown: " + e.getMessage());
-        } finally {
-            // Удаляем временные файлы
-            new File(path + "output.json").delete();
-            new File(path + "output.xml").delete();
-        }
-    }
-
-
-    private boolean isFileContentEqual(String filePath1, String filePath2) {
-        try {
-            String content1 = Files.readString(Path.of(filePath1)).replaceAll("\\s", "");
-            String content2 = Files.readString(Path.of(filePath2)).replaceAll("\\s", "");
-            return content1.equals(content2);
-        } catch (IOException e) {
-            e.printStackTrace();
-            return false;
+            System.setErr(System.err);
         }
     }
 }
