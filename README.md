@@ -15,7 +15,9 @@
   - `test`: Тесты для программы
 ## Работа программы
 1. Требуется скачать JDK версии 21 (x64 Compressed Archive), который можно скачать с:
-  ```https://www.oracle.com/java/technologies/downloads/#jdk21-windows```
+
+    [https://www.oracle.com/java/technologies/downloads/#jdk21-windows](https://www.oracle.com/java/technologies/downloads/#jdk21-windows)
+
 3. **Клонирование репозитория**
    ```bash
     git clone https://github.com/SlowlyDoor/FileConverter.git
