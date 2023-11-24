@@ -13,12 +13,20 @@
     - `java`: Классы необходимые для работы с xml и json файлами 
     - `resources`: Примеры данных xml и json
   - `test`: Тесты для программы
+## Работа программы
+1. Требуется скачать JDK версии 21 (x64 Compressed Archive), который можно скачать с:
+  ```https://www.oracle.com/java/technologies/downloads/#jdk21-windows```
+3. **Клонирование репозитория**
+   ```bash
+    git clone https://github.com/SlowlyDoor/FileConverter.git
+    cd FileConverter
+   ```
 ## Пример использования
 - Для конвертации `data.xml` в `dataConvert.json` необходимо:
-```
-java -jar FileConverter.jar data.xml dataConvert.json
+```bash
+java -jar  out\artifacts\FileConverter_jar\FileConverter.jar \your-path\to-file\data.xml \your-path\to-file\dataConvert.json
 ```
 - Для конвертации `data.json` в `dataConvert.xml` необходимо:
-```
-java -jar FileConverter.jar data.json dataConvert.xml
+```bash
+java -jar  out\artifacts\FileConverter_jar\FileConverter.jar \your-path\to-file\data.json \your-path\to-file\dataConvert.xml
 ```
