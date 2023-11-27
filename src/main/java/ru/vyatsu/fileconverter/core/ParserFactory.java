@@ -1,11 +1,11 @@
-package ru.vyatsu.service;
+package ru.vyatsu.fileconverter.core;
 
-import ru.vyatsu.service.interfaces.JsonReader;
-import ru.vyatsu.service.interfaces.JsonWriter;
-import ru.vyatsu.service.interfaces.XmlReader;
-import ru.vyatsu.service.interfaces.XmlWriter;
-import ru.vyatsu.service.structure.xml.Mangalib;
-import ru.vyatsu.service.structure.json.MangalibJson;
+import ru.vyatsu.fileconverter.core.implementation.JsonReader;
+import ru.vyatsu.fileconverter.core.implementation.JsonWriter;
+import ru.vyatsu.fileconverter.core.implementation.XmlReader;
+import ru.vyatsu.fileconverter.core.implementation.XmlWriter;
+import ru.vyatsu.fileconverter.core.model.json.MangalibJson;
+import ru.vyatsu.fileconverter.core.model.xml.Mangalib;
 
 public final class ParserFactory {
     public static Parser<Mangalib> createXmlParser() {

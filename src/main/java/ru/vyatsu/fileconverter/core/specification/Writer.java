@@ -1,4 +1,4 @@
-package ru.vyatsu.service.interfaces.write;
+package ru.vyatsu.fileconverter.core.specification;
 
 import java.io.IOException;
 

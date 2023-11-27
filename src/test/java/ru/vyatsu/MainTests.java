@@ -3,8 +3,8 @@ package ru.vyatsu;
 import lombok.val;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.io.TempDir;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import ru.vyatsu.fileconverter.Main;
+
 import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.IOException;
@@ -13,20 +13,18 @@ import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 class MainTests {
 
-    private static final Logger logger = LoggerFactory.getLogger(MainTests.class);
-
     @Test
-    void testMainWithInsufficientArgs(@TempDir Path tempDir) throws IOException {
+    void testMainWithInsufficientArgs(@TempDir Path tempDir) throws IllegalArgumentException {
         val errContent = new ByteArrayOutputStream();
         System.setErr(new PrintStream(errContent));
         try {
-            val args = new String[]{"data.json"};
-            Main.main(args);
-
-            assertThat(errContent.toString()).contains("Необходимо указать два аргумента!");
+            assertThatThrownBy(() -> Main.main(new String[]{"data.json"}))
+                    .isInstanceOf(IllegalArgumentException.class)
+                    .hasMessageContaining("Необходимо указать два аргумента");
         } finally {
             System.setErr(System.err);
         }
@@ -36,19 +34,15 @@ class MainTests {
         val outputPath = tempDir.resolve("test.json").toString();
         val outputFile = new File(outputPath);
 
-        if (outputFile.exists() && !outputFile.delete()) {
-            throw new IOException("Не удалось удалить существующий выходной файл перед тестированием.");
-        }
-
         try {
-            val args = new String[]{"src/test/resources/data.xml", outputPath};
-            Main.main(args);
+            Main.main(new String[]{getClass().getClassLoader().getResource("data.xml").getPath(), outputPath});
 
             assertThat(outputFile.exists()).as("Выходной файл не был создан.").isTrue();
         } finally {
             if (outputFile.exists() && !outputFile.delete()) {
                 throw new IOException("Не удалось удалить выходной файл после тестирования.");
             }
+            System.setErr(System.err);
         }
     }
 
@@ -58,10 +52,9 @@ class MainTests {
         System.setErr(new PrintStream(errContent));
 
         try {
-            val args = new String[]{"FileIsNo.xml", "output.json"};
-            Main.main(args);
-
-            assertThat(errContent.toString()).contains("Произошла ошибка: Файл не найден");
+            assertThatThrownBy(() -> Main.main(new String[]{"FileIsNo.xml", "output.json"}))
+                    .isInstanceOf(RuntimeException.class)
+                    .hasMessageContaining("Файл не найден");
         } finally {
             System.setErr(System.err);
         }
@@ -77,10 +70,10 @@ class MainTests {
             val invalidXmlPath = tempDir.resolve("invalid_data.xml");
             Files.write(invalidXmlPath, "invalid xml data".getBytes(StandardCharsets.UTF_8));
 
-            val args = new String[]{invalidXmlPath.toString(), "output.json"};
-            Main.main(args);
+            assertThatThrownBy(() -> Main.main(new String[]{invalidXmlPath.toString(), "output.json"}))
+                    .isInstanceOf(RuntimeException.class)
+                    .hasMessageContaining("Ошибка при чтении xml файла");
 
-            assertThat(errContent.toString()).contains("Произошла ошибка: при чтении xml файла");
         } finally {
             System.setErr(System.err);
         }

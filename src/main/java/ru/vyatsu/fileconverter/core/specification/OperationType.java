@@ -1,4 +1,4 @@
-package ru.vyatsu.service.interfaces;
+package ru.vyatsu.fileconverter.core.specification;
 
 public enum OperationType {
     JSON_TO_XML,

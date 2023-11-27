@@ -1,8 +1,7 @@
-package ru.vyatsu.service;
+package ru.vyatsu.fileconverter.core;
 
-import ru.vyatsu.service.interfaces.XmlWriter;
-import ru.vyatsu.service.interfaces.read.Reader;
-import ru.vyatsu.service.interfaces.write.Writer;
+import ru.vyatsu.fileconverter.core.specification.Reader;
+import ru.vyatsu.fileconverter.core.specification.Writer;
 
 
 public final class Parser<T> {

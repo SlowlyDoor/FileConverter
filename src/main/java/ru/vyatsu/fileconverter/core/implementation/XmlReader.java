@@ -1,10 +1,9 @@
-package ru.vyatsu.service.interfaces;
+package ru.vyatsu.fileconverter.core.implementation;
 
 import com.fasterxml.jackson.dataformat.xml.XmlMapper;
-import ru.vyatsu.service.interfaces.read.Reader;
-import ru.vyatsu.service.structure.xml.Mangalib;
+import ru.vyatsu.fileconverter.core.model.xml.Mangalib;
+import ru.vyatsu.fileconverter.core.specification.Reader;
 
-import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
@@ -17,9 +16,9 @@ public class XmlReader implements Reader<Mangalib> {
         } catch (FileNotFoundException e) {
             throw new IOException("Файл не найден: " + e.getMessage());
         } catch (IOException e) {
-            throw new IOException("при чтении xml файла", e);
+            throw new IOException("Ошибка при чтении xml файла", e);
         } catch (Exception e) {
-            throw new IOException("непредвиденная ошибка", e);
+            throw new IOException("Непредвиденная ошибка", e);
         }
     }
 }
