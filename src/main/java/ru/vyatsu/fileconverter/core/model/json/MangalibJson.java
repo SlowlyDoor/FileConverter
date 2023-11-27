@@ -1,6 +1,7 @@
-package ru.vyatsu.service.structure.json;
+package ru.vyatsu.fileconverter.core.model.json;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -11,8 +12,8 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 @JsonIgnoreProperties(ignoreUnknown = true)
-public class TeamTranslationJson {
-    private Integer publicationProjects;
-    private String adminName;
-    private String name;
+public class MangalibJson {
+    @JsonProperty("mangalib")
+    private AuthorsJson mangalib;
+
 }

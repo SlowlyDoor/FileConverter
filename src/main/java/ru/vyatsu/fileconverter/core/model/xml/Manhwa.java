@@ -1,4 +1,4 @@
-package ru.vyatsu.service.structure.xml;
+package ru.vyatsu.fileconverter.core.model.xml;
 
 import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlProperty;
 import lombok.AllArgsConstructor;

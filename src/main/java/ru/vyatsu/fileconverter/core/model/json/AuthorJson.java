@@ -1,4 +1,4 @@
-package ru.vyatsu.service.structure.json;
+package ru.vyatsu.fileconverter.core.model.json;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.*;
