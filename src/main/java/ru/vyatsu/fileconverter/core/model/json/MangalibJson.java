@@ -15,5 +15,4 @@ import lombok.NoArgsConstructor;
 public class MangalibJson {
     @JsonProperty("mangalib")
     private AuthorsJson mangalib;
-
 }
