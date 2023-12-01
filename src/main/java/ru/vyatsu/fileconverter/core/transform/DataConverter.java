@@ -1,11 +1,10 @@
 package ru.vyatsu.fileconverter.core.transform;
 
+import ru.vyatsu.fileconverter.core.ApplicationException;
 import ru.vyatsu.fileconverter.core.Parser;
 import ru.vyatsu.fileconverter.core.ParserFactory;
 import ru.vyatsu.fileconverter.core.model.json.MangalibJson;
 import ru.vyatsu.fileconverter.core.model.xml.MangalibXml;
-
-import java.io.IOException;
 
 public abstract class DataConverter {
     protected Parser<MangalibJson> jsonParser;
@@ -20,5 +19,5 @@ public abstract class DataConverter {
         this.outputPath = outputPath;
     }
 
-    public abstract void convert() throws IOException;
+    public abstract void convert() throws ApplicationException;
 }

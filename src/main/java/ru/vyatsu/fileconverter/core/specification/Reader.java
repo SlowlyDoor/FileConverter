@@ -1,7 +1,7 @@
 package ru.vyatsu.fileconverter.core.specification;
 
-import java.io.IOException;
+import ru.vyatsu.fileconverter.core.ApplicationException;
 
 public interface Reader<T> {
-    T read(String path) throws IOException;
+    T read(String path) throws ApplicationException;
 }

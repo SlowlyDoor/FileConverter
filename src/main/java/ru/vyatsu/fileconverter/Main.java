@@ -1,12 +1,12 @@
 package ru.vyatsu.fileconverter;
 
 import org.apache.log4j.PropertyConfigurator;
+import ru.vyatsu.fileconverter.core.ApplicationException;
 import ru.vyatsu.fileconverter.core.transform.ConverterFactory;
 import ru.vyatsu.fileconverter.core.specification.OperationType;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import java.io.IOException;
 import java.util.Objects;
 
 public class Main {
@@ -23,7 +23,7 @@ public class Main {
         }
     }
 
-    private static void processConversion(String[] args) throws IOException {
+    private static void processConversion(String[] args) throws ApplicationException {
         PropertyConfigurator.configure(
                 Objects.requireNonNull(
                         Main.class.getClassLoader().getResource("log4j.properties")

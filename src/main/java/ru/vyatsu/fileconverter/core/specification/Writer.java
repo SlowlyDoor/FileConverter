@@ -1,7 +1,7 @@
 package ru.vyatsu.fileconverter.core.specification;
 
-import java.io.IOException;
+import ru.vyatsu.fileconverter.core.ApplicationException;
 
 public interface Writer<T> {
-    void write(T data, String path) throws IOException;
+    void write(T data, String path) throws ApplicationException;
 }
