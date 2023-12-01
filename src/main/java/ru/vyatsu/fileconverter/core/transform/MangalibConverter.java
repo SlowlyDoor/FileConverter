@@ -7,7 +7,6 @@ import ru.vyatsu.fileconverter.core.model.xml.TeamTranslation;
 
 import java.util.*;
 
-
 public class MangalibConverter {
     private MangalibConverter() {}
 
@@ -25,7 +24,10 @@ public class MangalibConverter {
 
             // Если автор уже существует, добавляем манхву к его списку
             if (authorMap.containsKey(authorName)) {
-                authorMap.get(authorName).getAuthor().getManhws().add(manhwaToManhwaJson(manhwa));
+                authorMap.get(authorName)
+                        .getAuthor()
+                        .getManhws()
+                        .add(manhwaToManhwaJson(manhwa));
             } else {
                 // Создаем нового автора с манхвой и добавляем в мап
                 authorMap.put(authorName, manhwaToAuthor(manhwa));
