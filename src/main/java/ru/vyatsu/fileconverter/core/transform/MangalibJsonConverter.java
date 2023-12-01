@@ -9,8 +9,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class MangalibJsonConverter {
-
     private static int currentId = 0;
+
     private MangalibJsonConverter(){}
 
     public static MangalibXml mangalibJsonToMangalib(MangalibJson mangalibJson) {
