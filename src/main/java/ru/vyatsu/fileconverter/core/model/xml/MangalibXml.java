@@ -15,10 +15,8 @@ import java.util.List;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-public class Mangalib {
-
+public class MangalibXml {
     @JacksonXmlElementWrapper(useWrapping = false)
     @JacksonXmlProperty(localName = "manhwa")
     private List<Manhwa> mangalib;
-
 }

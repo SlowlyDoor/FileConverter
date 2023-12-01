@@ -1,8 +1,7 @@
 package ru.vyatsu.fileconverter.core.transform;
 
-
 import ru.vyatsu.fileconverter.core.model.json.*;
-import ru.vyatsu.fileconverter.core.model.xml.Mangalib;
+import ru.vyatsu.fileconverter.core.model.xml.MangalibXml;
 import ru.vyatsu.fileconverter.core.model.xml.Manhwa;
 import ru.vyatsu.fileconverter.core.model.xml.TeamTranslation;
 
@@ -12,19 +11,20 @@ import java.util.List;
 public class MangalibJsonConverter {
 
     private static int currentId = 0;
+    private MangalibJsonConverter(){}
 
-    public static Mangalib mangalibJsonToMangalib(MangalibJson mangalibJson) {
+    public static MangalibXml mangalibJsonToMangalib(MangalibJson mangalibJson) {
         List<Manhwa> manhwaList = new ArrayList<>();
 
         if (mangalibJson != null && mangalibJson.getMangalib() != null && mangalibJson.getMangalib().getAuthors() != null) {
-            for (Author authorJson : mangalibJson.getMangalib().getAuthors()) {
+            for (Authors authorJson : mangalibJson.getMangalib().getAuthors()) {
                 if (authorJson.getAuthor() != null) {
                     manhwaList.addAll(authorJsonToManhwaList(authorJson.getAuthor()));
                 }
             }
         }
 
-        return Mangalib.builder().mangalib(manhwaList).build();
+        return MangalibXml.builder().mangalib(manhwaList).build();
     }
 
     private static List<Manhwa> authorJsonToManhwaList(AuthorJson authorJson) {
