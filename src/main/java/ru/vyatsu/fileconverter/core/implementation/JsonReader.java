@@ -4,7 +4,6 @@ import com.google.gson.GsonBuilder;
 import ru.vyatsu.fileconverter.core.model.json.MangalibJson;
 import ru.vyatsu.fileconverter.core.specification.Reader;
 
-
 import java.io.*;
 
 public class JsonReader implements Reader<MangalibJson> {
@@ -12,12 +11,12 @@ public class JsonReader implements Reader<MangalibJson> {
         try (FileReader reader = new FileReader(path)) {
             return ((new GsonBuilder().create())
                     .fromJson(reader, MangalibJson.class));
-        } catch (FileNotFoundException e) {
-            throw new IOException("Файл не найден: " + e.getMessage());
-        } catch (IOException e) {
-            throw new IOException("Ошибка при чтении json файла", e);
-        } catch (Exception e) {
-            throw new IOException("Непредвиденная ошибка", e);
+        } catch (FileNotFoundException notFoundException) {
+            throw new FileNotFoundException("Файл не найден: " + notFoundException.getMessage());
+        } catch (IOException ioException) {
+            throw new IOException("Ошибка при чтении json файла", ioException);
+        } catch (Exception exception) {
+            throw new IOException("Непредвиденная ошибка", exception);
         }
     }
 }

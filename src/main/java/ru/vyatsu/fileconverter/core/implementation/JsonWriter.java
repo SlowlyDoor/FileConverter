@@ -13,10 +13,10 @@ public class JsonWriter implements Writer<MangalibJson> {
             new GsonBuilder().setPrettyPrinting()
                     .create()
                     .toJson(mangalib, writer);
-        } catch (IOException e) {
-            throw new IOException("Ошибка при записи json файла", e);
-        } catch (Exception e) {
-            throw new IOException("Непредвиденная ошибка", e);
+        } catch (IOException ioException) {
+            throw new IOException("Ошибка при записи json файла", ioException);
+        } catch (Exception exception) {
+            throw new IOException("Непредвиденная ошибка", exception);
         }
     }
 }
