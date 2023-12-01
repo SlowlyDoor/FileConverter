@@ -16,5 +16,5 @@ import java.util.List;
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class AuthorsJson {
     @JsonProperty("authors")
-    private List<Author> authors;
+    private List<Authors> authors;
 }
