@@ -1,22 +1,24 @@
 package ru.vyatsu.fileconverter.core.transform;
 
 import ru.vyatsu.fileconverter.core.model.json.*;
-import ru.vyatsu.fileconverter.core.model.xml.Mangalib;
+import ru.vyatsu.fileconverter.core.model.xml.MangalibXml;
 import ru.vyatsu.fileconverter.core.model.xml.Manhwa;
 import ru.vyatsu.fileconverter.core.model.xml.TeamTranslation;
 
 import java.util.*;
 
-public class MangalibConverter {
 
-    public static MangalibJson mangalibToMangalibJson(Mangalib mangalib) {
+public class MangalibConverter {
+    private MangalibConverter() {}
+
+    public static MangalibJson mangalibToMangalibJson(MangalibXml mangalib) {
         return MangalibJson.builder()
                 .mangalib(authorsToAuthorsJson(mangalib.getMangalib()))
                 .build();
     }
 
     private static AuthorsJson authorsToAuthorsJson(List<Manhwa> manhwaList) {
-        Map<String, Author> authorMap = new LinkedHashMap<>();
+        Map<String, Authors> authorMap = new LinkedHashMap<>();
 
         for (Manhwa manhwa : manhwaList) {
             String authorName = manhwa.getAuthor();
@@ -35,13 +37,13 @@ public class MangalibConverter {
                 .build();
     }
 
-    private static Author manhwaToAuthor(Manhwa manhwa) {
-        return Author.builder()
-                .author(convertManhwaToAuthorJson(manhwa))
+    private static Authors manhwaToAuthor(Manhwa manhwa) {
+        return Authors.builder()
+                .author(manhwaToAuthorJson(manhwa))
                 .build();
     }
 
-    private static AuthorJson convertManhwaToAuthorJson(Manhwa manhwa) {
+    private static AuthorJson manhwaToAuthorJson(Manhwa manhwa) {
         return AuthorJson.builder()
                 .name(manhwa.getAuthor())
                 .manhws(new ArrayList<>(Collections.singletonList(manhwaToManhwaJson(manhwa))))
