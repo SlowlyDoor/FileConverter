@@ -13,6 +13,7 @@ import java.io.PrintStream;
 import java.net.URL;
 import java.nio.file.Files;
 import java.nio.file.Path;
+
 import static org.assertj.core.api.Assertions.assertThat;
 import org.springframework.boot.test.system.CapturedOutput;
 import org.springframework.boot.test.system.OutputCaptureExtension;
@@ -89,4 +90,3 @@ class MainTests {
         }
     }
 }
-
