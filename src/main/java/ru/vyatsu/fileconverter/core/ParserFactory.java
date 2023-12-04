@@ -8,7 +8,9 @@ import ru.vyatsu.fileconverter.core.model.json.MangalibJson;
 import ru.vyatsu.fileconverter.core.model.xml.MangalibXml;
 
 public final class ParserFactory {
-    private ParserFactory(){}
+
+    private ParserFactory() {}
+
     public static Parser<MangalibXml> createXmlParser() {
         Parser<MangalibXml> parser = new Parser<>();
         parser.setReader(new XmlReader());
