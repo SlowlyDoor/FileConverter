@@ -1,20 +1,17 @@
 package ru.vyatsu.fileconverter.core.model.xml;
 
 import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlProperty;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import javax.xml.bind.annotation.*;
 
-@Data
+@Getter
+@Setter
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
 @XmlType(propOrder = {"id", "title", "author", "publicationYear", "chapters", "translationTeam"})
 public class Manhwa {
-
     @JacksonXmlProperty(isAttribute = true)
     private String id;
     private String title;

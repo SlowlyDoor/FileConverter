@@ -5,13 +5,13 @@ import lombok.*;
 
 import java.util.List;
 
-@Data
+@Getter
+@Setter
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class AuthorJson {
-
     private String name;
     private List<ManhwaJson> manhws;
 }
