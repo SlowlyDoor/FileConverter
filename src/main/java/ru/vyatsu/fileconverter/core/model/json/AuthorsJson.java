@@ -17,5 +17,5 @@ import java.util.List;
 public class AuthorsJson {
 
     @JsonProperty("authors")
-    private List<Authors> authors;
+    private List<Author> authors;
 }

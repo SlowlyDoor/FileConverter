@@ -18,7 +18,7 @@ public class MangalibConverter {
     }
 
     private static AuthorsJson authorsToAuthorsJson(List<Manhwa> manhwaList) {
-        Map<String, Authors> authorMap = new LinkedHashMap<>();
+        Map<String, Author> authorMap = new LinkedHashMap<>();
 
         for (Manhwa manhwa : manhwaList) {
             String authorName = manhwa.getAuthor();
@@ -26,7 +26,7 @@ public class MangalibConverter {
             // Если автор уже существует, добавляем манхву к его списку
             if (authorMap.containsKey(authorName)) {
                 authorMap.get(authorName)
-                        .getAuthor()
+                        .getAuthorJson()
                         .getManhws()
                         .add(manhwaToManhwaJson(manhwa));
             } else {
@@ -40,9 +40,9 @@ public class MangalibConverter {
                 .build();
     }
 
-    private static Authors manhwaToAuthor(Manhwa manhwa) {
-        return Authors.builder()
-                .author(manhwaToAuthorJson(manhwa))
+    private static Author manhwaToAuthor(Manhwa manhwa) {
+        return Author.builder()
+                .authorJson(manhwaToAuthorJson(manhwa))
                 .build();
     }
 

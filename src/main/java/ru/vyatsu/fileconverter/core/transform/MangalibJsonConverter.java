@@ -18,9 +18,9 @@ public class MangalibJsonConverter {
         List<Manhwa> manhwaList = new ArrayList<>();
 
         if (mangalibJson != null && mangalibJson.getMangalib() != null && mangalibJson.getMangalib().getAuthors() != null) {
-            for (Authors authorJson : mangalibJson.getMangalib().getAuthors()) {
-                if (authorJson.getAuthor() != null) {
-                    manhwaList.addAll(authorJsonToManhwaList(authorJson.getAuthor()));
+            for (Author authorJson : mangalibJson.getMangalib().getAuthors()) {
+                if (authorJson.getAuthorJson() != null) {
+                    manhwaList.addAll(authorJsonToManhwaList(authorJson.getAuthorJson()));
                 }
             }
         }
