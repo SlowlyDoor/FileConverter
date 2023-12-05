@@ -1,5 +1,6 @@
 package ru.vyatsu.fileconverter.core.transform;
 
+import lombok.experimental.UtilityClass;
 import ru.vyatsu.fileconverter.core.model.json.*;
 import ru.vyatsu.fileconverter.core.model.xml.MangalibXml;
 import ru.vyatsu.fileconverter.core.model.xml.Manhwa;
@@ -8,13 +9,12 @@ import ru.vyatsu.fileconverter.core.model.xml.TeamTranslation;
 import java.util.ArrayList;
 import java.util.List;
 
+@UtilityClass
 public class MangalibJsonConverter {
 
-    private static int currentId = 0;
+    private int currentId = 0;
 
-    private MangalibJsonConverter() {}
-
-    public static MangalibXml mangalibJsonToMangalib(MangalibJson mangalibJson) {
+    public MangalibXml mangalibJsonToMangalib(MangalibJson mangalibJson) {
         List<Manhwa> manhwaList = new ArrayList<>();
 
         if (mangalibJson != null && mangalibJson.getMangalib() != null && mangalibJson.getMangalib().getAuthors() != null) {
@@ -28,7 +28,7 @@ public class MangalibJsonConverter {
         return MangalibXml.builder().mangalib(manhwaList).build();
     }
 
-    private static List<Manhwa> authorJsonToManhwaList(AuthorJson authorJson) {
+    private List<Manhwa> authorJsonToManhwaList(AuthorJson authorJson) {
         List<Manhwa> manhwaList = new ArrayList<>();
 
         if (authorJson.getManhws() != null) {
@@ -39,7 +39,7 @@ public class MangalibJsonConverter {
         return manhwaList;
     }
 
-    private static Manhwa manhwaJsonToManhwa(ManhwaJson manhwaJson, String authorName) {
+    private Manhwa manhwaJsonToManhwa(ManhwaJson manhwaJson, String authorName) {
         return Manhwa.builder()
                 .id(generateId())
                 .title(manhwaJson.getTitle())
@@ -50,7 +50,7 @@ public class MangalibJsonConverter {
                 .build();
     }
 
-    private static TeamTranslation teamTranslationJsonToTeamTranslation(TeamTranslationJson teamTranslationJson) {
+    private TeamTranslation teamTranslationJsonToTeamTranslation(TeamTranslationJson teamTranslationJson) {
         return TeamTranslation.builder()
                 .name(teamTranslationJson.getName())
                 .publicationProjects(teamTranslationJson.getPublicationProjects())
@@ -58,7 +58,7 @@ public class MangalibJsonConverter {
                 .build();
     }
 
-    private static String generateId() {
+    private String generateId() {
         return String.valueOf(currentId++);
     }
 }
