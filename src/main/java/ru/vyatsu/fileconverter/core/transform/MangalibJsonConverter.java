@@ -8,6 +8,7 @@ import ru.vyatsu.fileconverter.core.model.xml.TeamTranslation;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 @UtilityClass
 public class MangalibJsonConverter {
@@ -18,9 +19,10 @@ public class MangalibJsonConverter {
         List<Manhwa> manhwaList = new ArrayList<>();
 
         if (mangalibJson != null && mangalibJson.getMangalib() != null && mangalibJson.getMangalib().getAuthors() != null) {
-            for (Author authorJson : mangalibJson.getMangalib().getAuthors()) {
-                if (authorJson.getAuthorJson() != null) {
-                    manhwaList.addAll(authorJsonToManhwaList(authorJson.getAuthorJson()));
+            for (Map<String, AuthorJson> authorMap : mangalibJson.getMangalib().getAuthors()) {
+                if (!authorMap.isEmpty()) {
+                    Map.Entry<String, AuthorJson> entry = authorMap.entrySet().iterator().next();
+                    manhwaList.addAll(authorJsonToManhwaList(entry.getValue().getName(), entry.getValue()));
                 }
             }
         }
@@ -28,15 +30,10 @@ public class MangalibJsonConverter {
         return MangalibXml.builder().mangalib(manhwaList).build();
     }
 
-    private List<Manhwa> authorJsonToManhwaList(AuthorJson authorJson) {
-        List<Manhwa> manhwaList = new ArrayList<>();
-
-        if (authorJson.getManhws() != null) {
-            for (ManhwaJson manhwaJson : authorJson.getManhws()) {
-                manhwaList.add(manhwaJsonToManhwa(manhwaJson, authorJson.getName()));
-            }
-        }
-        return manhwaList;
+    private List<Manhwa> authorJsonToManhwaList(String authorName, AuthorJson authorJson) {
+        return authorJson.getManhws().stream()
+                .map(manhwaJson -> manhwaJsonToManhwa(manhwaJson, authorName))
+                .toList();
     }
 
     private Manhwa manhwaJsonToManhwa(ManhwaJson manhwaJson, String authorName) {
@@ -62,3 +59,4 @@ public class MangalibJsonConverter {
         return String.valueOf(currentId++);
     }
 }
+

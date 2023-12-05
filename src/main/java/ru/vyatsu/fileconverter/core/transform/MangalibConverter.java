@@ -7,6 +7,7 @@ import ru.vyatsu.fileconverter.core.model.xml.Manhwa;
 import ru.vyatsu.fileconverter.core.model.xml.TeamTranslation;
 
 import java.util.*;
+import java.util.stream.Collectors;
 
 @UtilityClass
 public class MangalibConverter {
@@ -18,36 +19,31 @@ public class MangalibConverter {
     }
 
     private AuthorsJson authorsToAuthorsJson(List<Manhwa> manhwaList) {
-        Map<String, Author> authorMap = new LinkedHashMap<>();
+        List<Map<String, AuthorJson>> authorsList = new ArrayList<>();
+        Set<String> addedAuthors = new LinkedHashSet<>();
 
         for (Manhwa manhwa : manhwaList) {
             String authorName = manhwa.getAuthor();
-
-            if (authorMap.containsKey(authorName)) {
-                authorMap.get(authorName)
-                        .getAuthorJson()
-                        .getManhws()
-                        .add(manhwaToManhwaJson(manhwa));
-            } else {
-                authorMap.put(authorName, manhwaToAuthor(manhwa));
+            if (!addedAuthors.contains(authorName)) {
+                Map<String, AuthorJson> authorMap = new HashMap<>();
+                authorMap.put("author", authorToAuthorJson(authorName, manhwaList));
+                authorsList.add(authorMap);
+                addedAuthors.add(authorName);
             }
         }
 
         return AuthorsJson.builder()
-                .authors(new ArrayList<>(authorMap.values()))
+                .authors(authorsList)
                 .build();
     }
 
-    private Author manhwaToAuthor(Manhwa manhwa) {
-        return Author.builder()
-                .authorJson(manhwaToAuthorJson(manhwa))
-                .build();
-    }
-
-    private AuthorJson manhwaToAuthorJson(Manhwa manhwa) {
+    private AuthorJson authorToAuthorJson(String authorName, List<Manhwa> manhwaList) {
         return AuthorJson.builder()
-                .name(manhwa.getAuthor())
-                .manhws(new ArrayList<>(Collections.singletonList(manhwaToManhwaJson(manhwa))))
+                .name(authorName)
+                .manhws(manhwaList.stream()
+                        .filter(m -> authorName.equals(m.getAuthor()))
+                        .map(MangalibConverter::manhwaToManhwaJson)
+                        .collect(Collectors.toList()))
                 .build();
     }
 
