@@ -11,6 +11,7 @@ import java.util.List;
 @AllArgsConstructor
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class AuthorJson {
+
     private String name;
     private List<ManhwaJson> manhws;
 }

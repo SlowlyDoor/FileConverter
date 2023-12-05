@@ -7,6 +7,7 @@ import ru.vyatsu.fileconverter.core.model.json.MangalibJson;
 import ru.vyatsu.fileconverter.core.model.xml.MangalibXml;
 
 public abstract class DataConverter {
+
     protected Parser<MangalibJson> jsonParser;
     protected Parser<MangalibXml> xmlParser;
     protected String inputPath;

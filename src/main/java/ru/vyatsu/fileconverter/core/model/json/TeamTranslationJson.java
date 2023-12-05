@@ -12,6 +12,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class TeamTranslationJson {
+
     private Integer publicationProjects;
     private String adminName;
     private String name;

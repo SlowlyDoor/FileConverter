@@ -25,6 +25,7 @@ class MainTests {
     void testMainWithInsufficientArgs(CapturedOutput output) {
         val errContent = new ByteArrayOutputStream();
         System.setErr(new PrintStream(errContent));
+
         try {
             Main.main(new String[]{"data.json"});
             // Проверка лога

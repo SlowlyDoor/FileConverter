@@ -10,6 +10,7 @@ import java.io.FileReader;
 import java.io.IOException;
 
 public class XmlReader implements Reader<MangalibXml> {
+
     public MangalibXml read(String path) throws ApplicationException {
         try (FileReader reader = new FileReader(path)) {
             return (new XmlMapper()).readValue(reader, MangalibXml.class);

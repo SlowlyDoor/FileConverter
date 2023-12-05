@@ -12,6 +12,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class ManhwaJson {
+
     private String title;
     private Integer publicationYear;
     private Integer chapters;

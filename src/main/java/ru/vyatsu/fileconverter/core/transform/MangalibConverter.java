@@ -8,6 +8,7 @@ import ru.vyatsu.fileconverter.core.model.xml.TeamTranslation;
 import java.util.*;
 
 public class MangalibConverter {
+
     private MangalibConverter() {}
 
     public static MangalibJson mangalibToMangalibJson(MangalibXml mangalib) {

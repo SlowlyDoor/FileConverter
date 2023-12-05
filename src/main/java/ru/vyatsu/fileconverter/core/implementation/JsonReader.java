@@ -8,6 +8,7 @@ import ru.vyatsu.fileconverter.core.specification.Reader;
 import java.io.*;
 
 public class JsonReader implements Reader<MangalibJson> {
+
     public MangalibJson read(String path) throws ApplicationException {
         try (FileReader reader = new FileReader(path)) {
             return ((new GsonBuilder().create())

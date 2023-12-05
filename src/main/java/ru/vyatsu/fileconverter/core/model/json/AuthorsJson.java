@@ -15,6 +15,7 @@ import java.util.List;
 @AllArgsConstructor
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class AuthorsJson {
+
     @JsonProperty("authors")
     private List<Authors> authors;
 }

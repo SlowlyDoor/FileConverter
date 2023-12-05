@@ -14,6 +14,7 @@ import javax.xml.bind.annotation.XmlType;
 @AllArgsConstructor
 @XmlType(propOrder = {"name", "publicationProjects", "adminName"})
 public class TeamTranslation {
+
     @JacksonXmlProperty(isAttribute = true)
     private String name;
     private Integer publicationProjects;

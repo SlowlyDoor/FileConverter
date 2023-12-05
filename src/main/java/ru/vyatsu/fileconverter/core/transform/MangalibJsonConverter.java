@@ -9,9 +9,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class MangalibJsonConverter {
+
     private static int currentId = 0;
 
-    private MangalibJsonConverter(){}
+    private MangalibJsonConverter() {}
 
     public static MangalibXml mangalibJsonToMangalib(MangalibJson mangalibJson) {
         List<Manhwa> manhwaList = new ArrayList<>();
@@ -29,6 +30,7 @@ public class MangalibJsonConverter {
 
     private static List<Manhwa> authorJsonToManhwaList(AuthorJson authorJson) {
         List<Manhwa> manhwaList = new ArrayList<>();
+
         if (authorJson.getManhws() != null) {
             for (ManhwaJson manhwaJson : authorJson.getManhws()) {
                 manhwaList.add(manhwaJsonToManhwa(manhwaJson, authorJson.getName()));

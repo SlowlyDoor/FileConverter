@@ -1,6 +1,7 @@
 package ru.vyatsu.fileconverter.core.specification;
 
 public enum OperationType {
+
     JSON_TO_XML,
     XML_TO_JSON;
 
@@ -19,6 +20,7 @@ public enum OperationType {
 
     private static String getFileExtension(String fileName) {
         int lastDotIndex = fileName.lastIndexOf(".");
+
         if (lastDotIndex == -1) {
             throw new IllegalArgumentException("Файл без расширения: " + fileName);
         }

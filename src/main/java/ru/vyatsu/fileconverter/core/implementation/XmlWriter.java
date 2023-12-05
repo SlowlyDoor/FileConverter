@@ -9,6 +9,7 @@ import java.io.FileWriter;
 import java.io.IOException;
 
 public class XmlWriter implements Writer<MangalibXml> {
+
     public void write(MangalibXml mangalib, String path) throws ApplicationException {
         try (FileWriter writer = new FileWriter(path)) {
             new XmlMapper().writerWithDefaultPrettyPrinter()

@@ -3,6 +3,7 @@ package ru.vyatsu.fileconverter.core.transform;
 import ru.vyatsu.fileconverter.core.specification.OperationType;
 
 public class ConverterFactory {
+
     private ConverterFactory() {}
 
     public static DataConverter choice(OperationType operationType, String inputPath, String outputPath) {

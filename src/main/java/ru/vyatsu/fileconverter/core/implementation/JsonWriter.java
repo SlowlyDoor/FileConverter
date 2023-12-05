@@ -9,6 +9,7 @@ import java.io.FileWriter;
 import java.io.IOException;
 
 public class JsonWriter implements Writer<MangalibJson> {
+
     public void write(MangalibJson mangalib, String path) throws ApplicationException {
         try (FileWriter writer = new FileWriter(path)) {
             new GsonBuilder().setPrettyPrinting()

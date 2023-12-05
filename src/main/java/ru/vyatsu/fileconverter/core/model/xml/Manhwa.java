@@ -14,6 +14,7 @@ import javax.xml.bind.annotation.*;
 @AllArgsConstructor
 @XmlType(propOrder = {"id", "title", "author", "publicationYear", "chapters", "translationTeam"})
 public class Manhwa {
+
     @JacksonXmlProperty(isAttribute = true)
     private String id;
     private String title;
