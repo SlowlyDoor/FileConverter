@@ -28,7 +28,6 @@ class MainTests {
 
         try {
             Main.main(new String[]{"data.json"});
-            // Проверка лога
             assertThat(output).contains("Необходимо указать два аргумента");
         } finally {
             System.setErr(System.err);
@@ -45,10 +44,8 @@ class MainTests {
             if (resourceUrl != null) {
                 Main.main(new String[]{resourceUrl.getPath(), outputPath});
             } else {
-                // Обработка ситуации, когда ресурс не найден
                 throw new RuntimeException("Ресурс не найден");
             }
-
             assertThat(outputFile.exists()).as("Выходной файл не был создан.").isTrue();
         } finally {
             if (outputFile.exists() && !outputFile.delete()) {
@@ -65,7 +62,6 @@ class MainTests {
 
         try {
             Main.main(new String[]{"FileIsNo.xml", "output.json"});
-            // Проверка лога
             assertThat(output).contains("Файл не найден");
         } finally {
             System.setErr(System.err);
@@ -78,13 +74,9 @@ class MainTests {
         System.setErr(new PrintStream(errContent));
 
         try {
-            // Подготавливаем файл с некорректными данными
             val invalidXmlPath = tempDir.resolve("invalid_data.xml");
             Files.writeString(invalidXmlPath, "invalid xml data");
-
             Main.main(new String[]{invalidXmlPath.toString(), "output.json"});
-
-            // Проверка лога
             assertThat(output).contains("Ошибка при чтении xml файла");
         } finally {
             System.setErr(System.err);

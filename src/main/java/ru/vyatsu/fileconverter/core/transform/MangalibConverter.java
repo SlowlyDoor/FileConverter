@@ -23,14 +23,12 @@ public class MangalibConverter {
         for (Manhwa manhwa : manhwaList) {
             String authorName = manhwa.getAuthor();
 
-            // Если автор уже существует, добавляем манхву к его списку
             if (authorMap.containsKey(authorName)) {
                 authorMap.get(authorName)
                         .getAuthorJson()
                         .getManhws()
                         .add(manhwaToManhwaJson(manhwa));
             } else {
-                // Создаем нового автора с манхвой и добавляем в мап
                 authorMap.put(authorName, manhwaToAuthor(manhwa));
             }
         }
