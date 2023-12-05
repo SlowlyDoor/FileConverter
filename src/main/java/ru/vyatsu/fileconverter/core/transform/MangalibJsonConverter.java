@@ -8,7 +8,6 @@ import ru.vyatsu.fileconverter.core.model.xml.TeamTranslation;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 
 @UtilityClass
 public class MangalibJsonConverter {
@@ -19,10 +18,9 @@ public class MangalibJsonConverter {
         List<Manhwa> manhwaList = new ArrayList<>();
 
         if (mangalibJson != null && mangalibJson.getMangalib() != null && mangalibJson.getMangalib().getAuthors() != null) {
-            for (Map<String, AuthorJson> authorMap : mangalibJson.getMangalib().getAuthors()) {
-                if (!authorMap.isEmpty()) {
-                    Map.Entry<String, AuthorJson> entry = authorMap.entrySet().iterator().next();
-                    manhwaList.addAll(authorJsonToManhwaList(entry.getValue().getName(), entry.getValue()));
+            for (AuthorJson authorJson : mangalibJson.getMangalib().getAuthors()) {
+                if (authorJson != null) {
+                    manhwaList.addAll(authorJsonToManhwaList(authorJson.getName(), authorJson));
                 }
             }
         }
@@ -59,4 +57,3 @@ public class MangalibJsonConverter {
         return String.valueOf(currentId++);
     }
 }
-

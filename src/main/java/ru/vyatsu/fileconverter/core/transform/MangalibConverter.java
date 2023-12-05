@@ -19,15 +19,13 @@ public class MangalibConverter {
     }
 
     private AuthorsJson authorsToAuthorsJson(List<Manhwa> manhwaList) {
-        List<Map<String, AuthorJson>> authorsList = new ArrayList<>();
+        List<AuthorJson> authorsList = new ArrayList<>();
         Set<String> addedAuthors = new LinkedHashSet<>();
 
         for (Manhwa manhwa : manhwaList) {
             String authorName = manhwa.getAuthor();
             if (!addedAuthors.contains(authorName)) {
-                Map<String, AuthorJson> authorMap = new HashMap<>();
-                authorMap.put("author", authorToAuthorJson(authorName, manhwaList));
-                authorsList.add(authorMap);
+                authorsList.add(authorToAuthorJson(authorName, manhwaList));
                 addedAuthors.add(authorName);
             }
         }
