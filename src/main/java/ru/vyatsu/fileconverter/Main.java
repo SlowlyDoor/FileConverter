@@ -6,8 +6,6 @@ import ru.vyatsu.fileconverter.core.ApplicationException;
 import ru.vyatsu.fileconverter.core.transform.ConverterFactory;
 import ru.vyatsu.fileconverter.core.specification.OperationType;
 
-import java.util.Objects;
-
 @Slf4j
 public class Main {
 
@@ -23,9 +21,8 @@ public class Main {
     }
 
     private static void processConversion(String[] args) throws ApplicationException {
-        PropertyConfigurator.configure(Objects
-                .requireNonNull(Main.class.getClassLoader()
-                        .getResource("log4j.properties")).getPath());
+        PropertyConfigurator.configure(Main.class
+                .getClassLoader().getResourceAsStream("log4j.properties"));
         ConverterFactory.choice(OperationType.getOperationType(args[0], args[1]),
                                 args[0], args[1]).convert();
     }
