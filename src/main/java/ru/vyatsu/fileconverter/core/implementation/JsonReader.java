@@ -14,7 +14,7 @@ public class JsonReader implements Reader<MangalibJson> {
             return ((new GsonBuilder().create())
                     .fromJson(reader, MangalibJson.class));
         } catch (FileNotFoundException notFoundException) {
-            throw new ApplicationException("Файл не найден: " + notFoundException.getMessage());
+            throw new ApplicationException("Файл не найден: " + notFoundException.getMessage(), notFoundException);
         } catch (IOException ioException) {
             throw new ApplicationException("Ошибка при чтении json файла", ioException);
         } catch (Exception exception) {

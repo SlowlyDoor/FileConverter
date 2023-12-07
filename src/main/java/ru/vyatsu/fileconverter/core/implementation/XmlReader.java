@@ -15,7 +15,7 @@ public class XmlReader implements Reader<MangalibXml> {
         try (FileReader reader = new FileReader(path)) {
             return (new XmlMapper()).readValue(reader, MangalibXml.class);
         } catch (FileNotFoundException notFoundException) {
-            throw new ApplicationException("Файл не найден: " + notFoundException.getMessage());
+            throw new ApplicationException("Файл не найден: " + notFoundException.getMessage(), notFoundException);
         } catch (IOException ioException) {
             throw new ApplicationException("Ошибка при чтении xml файла", ioException);
         } catch (Exception exception) {
